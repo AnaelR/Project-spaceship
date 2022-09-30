@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17316318, g: 0.16457182, b: 0.29665613, a: 1}
+  m_IndirectSpecularColor: {r: 0.17323539, g: 0.16459554, b: 0.2966911, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -288,6 +288,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c7cb50700058db4fb49f6f7fb45a828, type: 3}
+--- !u!114 &106511463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3000675896459585316, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+  m_PrefabInstance: {fileID: 1872080059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494181a0c8f454e518c1bf63e6aadae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &259583519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -467,6 +478,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7d05bfa7c42840e4bfe91be3a2d5faa, type: 3}
+--- !u!114 &686541477 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2393381177123149758, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+  m_PrefabInstance: {fileID: 1872080059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494181a0c8f454e518c1bf63e6aadae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &687309512 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7436254762985334353, guid: a7d05bfa7c42840e4bfe91be3a2d5faa, type: 3}
@@ -622,6 +644,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68d6db09f7afa440993368ce4f27a356, type: 3}
+--- !u!1 &951035295 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6985614600605413722, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+  m_PrefabInstance: {fileID: 1872080059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1117975879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -829,6 +856,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4589093133207910192, guid: 68d6db09f7afa440993368ce4f27a356, type: 3}
   m_PrefabInstance: {fileID: 851399141}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1358862407 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4474282286562246658, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+  m_PrefabInstance: {fileID: 1872080059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494181a0c8f454e518c1bf63e6aadae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1421441251 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7436254763329937997, guid: a7d05bfa7c42840e4bfe91be3a2d5faa, type: 3}
@@ -1040,13 +1078,81 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 2025461574}
+    - target: {fileID: 2393381177123149728, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: radar
+      value: 
+      objectReference: {fileID: 686541477}
+    - target: {fileID: 2393381177123149728, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: preset
+      value: 
+      objectReference: {fileID: 11400000, guid: f8f962d147c994079ac2cfa61452ec72, type: 2}
+    - target: {fileID: 2393381177123149728, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 951035295}
+    - target: {fileID: 2393381177123149728, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393381177123149756, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000675896459585318, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000675896459585338, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: radar
+      value: 
+      objectReference: {fileID: 106511463}
+    - target: {fileID: 3000675896459585338, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: preset
+      value: 
+      objectReference: {fileID: 11400000, guid: f8f962d147c994079ac2cfa61452ec72, type: 2}
+    - target: {fileID: 3000675896459585338, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 951035295}
+    - target: {fileID: 3000675896459585338, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474282286562246656, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474282286562246684, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: radar
+      value: 
+      objectReference: {fileID: 1358862407}
+    - target: {fileID: 4474282286562246684, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: preset
+      value: 
+      objectReference: {fileID: 11400000, guid: f8f962d147c994079ac2cfa61452ec72, type: 2}
+    - target: {fileID: 4474282286562246684, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 951035295}
+    - target: {fileID: 4474282286562246684, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6354661610416474858, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
       propertyPath: m_Name
       value: F3_Red_Variant Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6985614601381733181, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 7064287023528902747, guid: 8eea55d16b2af421c86d9e8c5ff0ceaf, type: 3}
+    - target: {fileID: 6985614601381733181, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: preset
+      value: 
+      objectReference: {fileID: 11400000, guid: f8f962d147c994079ac2cfa61452ec72, type: 2}
+    - target: {fileID: 6985614601381733181, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
       propertyPath: fireRate
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7956473817339623673, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
       propertyPath: m_RootOrder
