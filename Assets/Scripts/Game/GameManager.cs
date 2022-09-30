@@ -5,7 +5,7 @@ using Ship;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GameManager : MonoBehaviour
+namespace Game
 {
     private static GameManager _instance = null;
     public GameObject PlayerShipPrefab;
@@ -23,11 +23,19 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance
     {
-        get
+        public delegate void SpeedEvent(float newSpeed); 
+        public event SpeedEvent OnSpeedChange;
+    
+        private static GameManager _instance = null;
+        public static GameManager Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = FindObjectOfType<GameManager>();
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<GameManager>();
+                }
+                return _instance;
             }
 
             return _instance;
