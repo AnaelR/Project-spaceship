@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TurretPreset
   m_EditorClassIdentifier: 
   fireRate: 0.62
-  bulletType: {fileID: 122648, guid: 2c8dd2ae33ffb479ba29386f0e4ddda1, type: 3}
+  bulletType: {fileID: 1259865673663102, guid: 1166ac602417d42bf9ad55b2137b67d9, type: 3}

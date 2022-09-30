@@ -118,3 +118,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   lifeTime: 10
+  canKill: 0

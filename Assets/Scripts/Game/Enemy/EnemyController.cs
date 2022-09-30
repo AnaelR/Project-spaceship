@@ -7,95 +7,22 @@ namespace Game.Enemy
 {
     public class EnemyController : MonoBehaviour
     {
-        //public UnityEngine.AI.NavMeshAgent agent;
-        //Chasing variables
-        public float chaseSpeed = 1f;
-        public GameObject targetToChase;
-
-        //Distance between player and enemy
-        private float _distance;
-        //Enemy target
-        public Transform target;
-        //Distance between enemy and target
-        public float targetDistance = 10f;
-        //Attack range 
-        public float attackRange = 2f;
-        //Cooldown between attacks
-        public float attackCooldown = 2f;
-        private float _attackTime;
-        //Attack damage amount
-        public float attackDamage = 1f;
         //Enemy health
         public float enemyHealth = 10f;
         private bool _isDead = false;
 
-        public float searchAreaRadius = 100f;
-        private Transform _searchAreaPosition;
-
         private float shipRotation = 0f;
 
 
-        private void Start()
-        {
-            _attackTime = Time.time;
-        }
-
-        private void Update()
-        {
-
-            // if (!_isDead)
-            // {
-            //     target = GameObject.Find("Player").transform;
-            //
-            //     _distance = Vector3.Distance(target.position, transform.position);
-            //
-            //     //if enemy cannot see target
-            //     if (_distance > targetDistance)
-            //     {
-            //         Patrol();
-            //     }
-            //
-            //     //if enemy can see target but is out of range
-            //     if (_distance < targetDistance && _distance > attackRange)
-            //     {
-            //         Chase();
-            //     }
-            //
-            //     //if enemy is in range
-            //     if (_distance < attackRange)
-            //     {
-            //         Attack();
-            //     }
-            // }
-        }
-
-        private void Chase()
-        {
-            //Play reactor animation
-            
-            //Enemy move
-            //agent.destination = target.position;
-            // agent.speed = chaseSpeed;
-            // agent.SetDestination(target.transform.position);
-            //character.Move(agent.desiredVelocity, false, false);
-        }
-
-        private void Attack()
-        {
-
-            //agent.destination = transform.position;
-            
-            if (Time.time > _attackTime) 
-            {
-                //Play weapons animation 
-                
-                //Fire
-                //target.GetComponent<PlayInentory>().ApplyDamage(attackDamage);
-
-                _attackTime = Time.time + attackCooldown;
-            }
-        }
-
+        /// <summary>
+        /// If the enemy is not dead, subtract the damage from the enemy's health, and if the enemy's health is less than or
+        /// equal to zero, call the Die() function
+        ///
+        /// WIP Not implemented yet
+        ///
+        /// 
+        /// </summary>
+        /// <param name="theDamage">The amount of damage to apply to the enemy.</param>
         public void ApplyDamage(float theDamage)
         {
             if (!_isDead)
@@ -109,16 +36,27 @@ namespace Game.Enemy
             }
         }
 
+        /// <summary>
+        /// If the player is dead, destroy the game object after 5 seconds
+        ///
+        /// 
+        /// WIP Not implemented yet
+        ///
+        /// 
+        /// </summary>
         private void Die()
         {
             _isDead = true;
-            
-            //Animation death
-            
             //Destroy
             Destroy(transform.gameObject, 5);
         }
         
+        /// <summary>
+        /// If the ship doesn't look at the destination point then rotate it to face it progressively, otherwise move it
+        /// forward
+        /// </summary>
+        /// <param name="Vector3">agentDesiredVelocity - the velocity of the agent</param>
+        /// <param name="Vector3">destination - the target destination</param>
         public void Move(Vector3 agentDesiredVelocity, Vector3 destination)
         {
             

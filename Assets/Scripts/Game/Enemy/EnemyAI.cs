@@ -21,9 +21,8 @@ namespace Game.Enemy
         }
 
         public State state;
-        private bool alive = true;
-        private bool pause = false;
-        
+        private bool _alive = true;
+
         //Patrolling variables
         public GameObject[] waypoints;
         public int waypointInd = 0;
@@ -32,23 +31,12 @@ namespace Game.Enemy
         //Chasing variables
         public float chaseSpeed = 1f;
         public GameObject target;
-        
-        private static EnemyAI _instance = null;
-        public static EnemyAI Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<EnemyAI>();
-                }
-                return _instance;
-            }
-        
-            private set { _instance = value; }
-        }
 
-
+        /// <summary>
+        /// The Start function is called when the game starts. It gets the NavMeshAgent component from the game object, sets
+        /// the updatePosition and updateRotation to true and false respectively, sets the state to PATROL, sets the _alive
+        /// variable to true, and subscribes to the OnTargetDetected event
+        /// </summary>
         private void Start()
         {
             agent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -56,22 +44,25 @@ namespace Game.Enemy
             agent.updatePosition = true;
             agent.updateRotation = false;
 
+            //Must be uncomment to activate random patrol
             // waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
             // waypointInd = Random.Range(0, waypoints.Length);
 
             state = EnemyAI.State.PATROL;
 
-            alive = true;
-            pause = true;
-            
+            _alive = true;
+
             this.radar.OnTargetDetected += this.Target;
 
             StartCoroutine("Fsm");
         }
 
+        /// <summary>
+        /// While the enemy is alive, switch between the two states, and yield null
+        /// </summary>
         IEnumerator Fsm()
         {
-            while (alive)
+            while (_alive)
             {
                 switch (state)
                 {
@@ -87,6 +78,10 @@ namespace Game.Enemy
             }
         }
 
+        /// <summary>
+        /// If the enemy is far away from the waypoint, move towards it. If the enemy is close to the waypoint, move to the
+        /// next waypoint
+        /// </summary>
         private void Patrol()
         {
             agent.speed = patrolSpeed;
@@ -102,6 +97,8 @@ namespace Game.Enemy
                 {
                     waypointInd = 0;
                 }
+                
+                //Must be uncomment to activate random patrol
                 //waypointInd = Random.Range(0, waypoints.Length);
                 
             }
@@ -111,6 +108,12 @@ namespace Game.Enemy
             }
         }
 
+        /// <summary>
+        /// If the enemy is detected, set the target to the new target and set the state to chase. If the enemy is not
+        /// detected, set the state to patrol
+        /// </summary>
+        /// <param name="newTarget">The game object that the enemy is targeting.</param>
+        /// <param name="isDetected">This is a boolean that is true if the player is detected by the enemy.</param>
         private void Target( GameObject newTarget, bool isDetected)
         {
             if (isDetected)
@@ -124,9 +127,12 @@ namespace Game.Enemy
             }
         }
         
+        /// <summary>
+        /// If the distance between the enemy and the player is greater than 100, then the enemy will chase the player
+        /// </summary>
         private void Chase()
         {
-            if (Vector3.Distance(enemy.transform.position, agent.destination) > 100)
+            if (Vector3.Distance(enemy.transform.position, agent.destination) > 70)
             {
                 agent.speed = chaseSpeed;
                 agent.SetDestination(target.transform.position);

@@ -14,11 +14,8 @@ namespace Game.Enemy
 
         private void OnTriggerEnter(Collider target)
         {
-            Debug.Log("Collider");
             if (target.gameObject.CompareTag(targetTag))
             {
-                Debug.Log("Player entered");
-                
                 OnTargetDetected?.Invoke(target.gameObject, true);
             }
         }
@@ -27,7 +24,6 @@ namespace Game.Enemy
         {
             if (target.gameObject.CompareTag("Player"))
             {
-                Debug.Log("Player exited");
                 OnTargetDetected?.Invoke(target.gameObject, false);
             }
         }
