@@ -1044,6 +1044,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: F3_Red_Variant Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6985614601381733181, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
+      propertyPath: fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7956473817339623673, guid: c0e8ac34d19b0466bbf0489df6c83934, type: 3}
       propertyPath: m_RootOrder
       value: 9

@@ -14,7 +14,7 @@ namespace Game.Enemy
 
         private GameObject _player;
 
-        public float fireRate = 1000f;
+        public float fireRate = 0.2f;
         private float _lastShot = 0.0f;
         private GameObject _newBullet;
 
@@ -23,7 +23,6 @@ namespace Game.Enemy
         {
             _shotReady = false;
             radar.OnTargetDetected += Fire;
-            _player = GameObject.FindWithTag("Player");
         }
 
         private void Update()
@@ -40,6 +39,7 @@ namespace Game.Enemy
         {
             if (isDetected)
             {
+                _player = GameObject.FindWithTag("Player");
                 Debug.Log(target.transform.position);
                 _target = target;
                 _shotReady = true;
