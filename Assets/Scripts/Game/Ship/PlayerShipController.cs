@@ -1,12 +1,10 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerShipController : MonoBehaviour
 {
+    public PlayerShipPreset preset;
+    public GameObject TPSCamera;
     private Vector3 _centerBasedOnScreenSize;
     private float _timeFactor = 150f;
     private float _noTurn = 0.1f;
@@ -20,12 +18,26 @@ public class PlayerShipController : MonoBehaviour
     private float _accelerationEase = 1f;
     private float _accelerationEaseCurrent;
 
-    private float _shipRotateDelay = 1f;
     private float _shipRotateDelayCurrent;
-    private float _shipRotateDelayToEnd = 1f;
 
+    private bool _isPaused = true;
 
-    [Tooltip("Player ship prefab")] public GameObject Ship;
+    private void Awake()
+    {
+        //Use preset data
+        if (preset)
+        {
+            _timeFactor = preset.timeFactor;
+            _noTurn = preset.noTurn;
+            _speedRatio = preset.speedRatio;
+            _speedMaxValue = preset.speedMaxValue;
+            _speedMinValue = preset.speedMinValue;
+            _accelerationEase = preset.accelerationEase;
+        }
+
+        //Toggle pause on init
+        TogglePause(true);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +45,16 @@ public class PlayerShipController : MonoBehaviour
         _centerBasedOnScreenSize = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         if (InputController.Instance)
             InputController.Instance.OnUserInput += InstanceOnOnUserInput;
+
+        if (GameManager.Instance)
+            GameManager.Instance.ToggleGamePause += TogglePause;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_isPaused)
+            return;
         ShipRotation();
         ShipSpeed();
     }
@@ -49,66 +66,68 @@ public class PlayerShipController : MonoBehaviour
         transform.position += transform.forward * _speedCurent;
     }
 
+    /// <summary>
+    /// Rotate ship with mouse position
+    /// </summary>
     private void ShipRotation()
     {
         var delta = (Input.mousePosition - _centerBasedOnScreenSize) / Screen.height;
         if (delta.y > _noTurn)
         {
             transform.Rotate(-(delta.y - _noTurn) * Time.deltaTime * _timeFactor, 0, 0);
-            // DelayShipRotation(-(delta.y - _noTurn * 1.3f) * Time.deltaTime * _timeFactor, 0, 0);
+            DelayCameraRotation(-(delta.y - _noTurn) * Time.deltaTime * _timeFactor, 0, 0);
         }
 
         if (delta.y < -_noTurn)
         {
             transform.Rotate(-(delta.y + _noTurn) * Time.deltaTime * _timeFactor, 0, 0);
-            // DelayShipRotation(-(delta.y + _noTurn * 1.3f) * Time.deltaTime * _timeFactor, 0, 0);
+            DelayCameraRotation(-(delta.y + _noTurn) * Time.deltaTime * _timeFactor, 0, 0);
         }
 
         if (delta.x > _noTurn)
         {
             transform.Rotate(0, (delta.x - _noTurn) * Time.deltaTime * _timeFactor, 0);
-            // DelayShipRotation(0, (delta.x - _noTurn * 1.3f) * Time.deltaTime * _timeFactor, 0);
+            DelayCameraRotation(0, (delta.x - _noTurn) * Time.deltaTime * _timeFactor, 0);
         }
 
         if (delta.x < -_noTurn)
         {
             transform.Rotate(0, (delta.x + _noTurn) * Time.deltaTime * _timeFactor, 0);
-            // DelayShipRotation(0, (delta.x + _noTurn * 1.3f) * Time.deltaTime * _timeFactor, 0);
+            DelayCameraRotation(0, (delta.x + _noTurn) * Time.deltaTime * _timeFactor, 0);
         }
     }
 
-    private void DelayShipRotation(float x, float y, float z)
+    /// <summary>
+    /// Delay the camera rotation when ship is moving
+    /// </summary>
+    private void DelayCameraRotation(float x, float y, float z)
     {
-        Ship.transform.Rotate(-x, -y, -z);
-        StartCoroutine(recenterShip());
+        TPSCamera.transform.Rotate(x, y, z);
+        StartCoroutine(recenterCamera());
     }
 
-    IEnumerator recenterShip()
+    /// <summary>
+    /// Recenter camera on based rotation
+    /// </summary>
+    IEnumerator recenterCamera()
     {
         Debug.Log("Enter in coroutine");
-        yield return new WaitForSeconds(0.1f);
+        while (TPSCamera.transform.localRotation.eulerAngles.magnitude >= 1)
+        {
+            var newRotation =
+                Quaternion.Lerp(TPSCamera.transform.localRotation, Quaternion.identity, 0.1f * Time.deltaTime);
+            TPSCamera.transform.localRotation = newRotation;
+            yield return null;
+        }
 
-        Ship.transform.Rotate(0, 0, 0);
-
+        TPSCamera.transform.localRotation = Quaternion.identity;
         yield return null;
     }
-    // IEnumerator recenterShip()
-    // {
-    //     Debug.Log("Enter in coroutine");
-    //     _shipRotateDelayCurrent = 0;
-    //     yield return new WaitForSeconds(0.1f);
-    //     while (_shipRotateDelayCurrent <= _shipRotateDelay)
-    //     {
-    //         var shipRotation = Ship.transform.localRotation;
-    //         Ship.transform.Rotate(Mathf.LerpAngle(shipRotation.x, 0, _shipRotateDelayCurrent / _shipRotateDelay),
-    //             Mathf.LerpAngle(shipRotation.y, 0, _shipRotateDelayCurrent / _shipRotateDelay),
-    //             Mathf.LerpAngle(shipRotation.z, 0, _shipRotateDelayCurrent / _shipRotateDelay));
-    //         _shipRotateDelayCurrent += Time.deltaTime;
-    //         Debug.Log("delayCurrent : " + _shipRotateDelayCurrent);
-    //         yield return null;
-    //     }
-    // }
 
+    /// <summary>
+    /// Handle speed input from player
+    /// </summary>
+    /// <param name="useraction">String: Action to do</param>
     private void InstanceOnOnUserInput(string useraction)
     {
         if (useraction == "speedUp")
@@ -137,5 +156,14 @@ public class PlayerShipController : MonoBehaviour
         _speedOnClic = _speedCurent;
         _accelerationEaseCurrent = 0;
         _speedTarget = new Vector3(0, 0, _speed * _speedRatio).magnitude;
+    }
+
+    /// <summary>
+    /// Toggle pause status
+    /// </summary>
+    /// <param name="status">Bool: Pause status (True : Pause enable, False : Pause disable)</param>
+    private void TogglePause(bool status)
+    {
+        _isPaused = status;
     }
 }

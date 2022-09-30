@@ -44,5 +44,11 @@ public class InputController : MonoBehaviour
         {
             this.OnUserInput?.Invoke("speedDown");
         }
+
+        // Escape button is press
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            this.OnUserInput?.Invoke("Pause");
+        }
     }
 }
