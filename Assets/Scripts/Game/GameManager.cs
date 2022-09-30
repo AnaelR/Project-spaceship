@@ -1,54 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
-using Ship;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Game
 {
-    public delegate void SpeedEvent(float newSpeed); 
-    public event SpeedEvent OnSpeedChange;
-    
-    private static GameManager _instance = null;
-    public static GameManager Instance
+    public class GameManager : MonoBehaviour
     {
-        get
+        public delegate void SpeedEvent(float newSpeed); 
+        public event SpeedEvent OnSpeedChange;
+    
+        private static GameManager _instance = null;
+        public static GameManager Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = FindObjectOfType<GameManager>();
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<GameManager>();
+                }
+                return _instance;
             }
-            return _instance;
-        }
         
-        private set { _instance = value; }
-    }
-
-    [Tooltip("The speed at which the object will rotate")]
-    private float _speed = 1;
-    public float Speed
-    {
-        get => _speed;
-        set
-        {
-            if (OnSpeedChange != null && value != _speed)
-            {
-                OnSpeedChange.Invoke(value);
-            }
-            _speed = value;
+            private set { _instance = value; }
         }
-    }
-    //public float speed { get; set; }
+
+        [Tooltip("The speed at which the object will rotate")]
+        private float _speed = 1;
+        public float Speed
+        {
+            get => _speed;
+            set
+            {
+                if (OnSpeedChange != null && value != _speed)
+                {
+                    OnSpeedChange.Invoke(value);
+                }
+                _speed = value;
+            }
+        }
+        //public float speed { get; set; }
     
-    private float _previousSpeed = 0.0f;
+        private float _previousSpeed = 0.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (GameManager.Instance == null)
-            GameManager.Instance = this;
+        // Start is called before the first frame update
+        void Start()
+        {
+            if (GameManager.Instance == null)
+                GameManager.Instance = this;
 
 
-        // if (InputController.Instance)
-        //     InputController.Instance.OnUserPause += Pause;
+            // if (InputController.Instance)
+            //     InputController.Instance.OnUserPause += Pause;
+        }
     }
 }
