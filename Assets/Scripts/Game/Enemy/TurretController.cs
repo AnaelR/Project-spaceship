@@ -13,9 +13,10 @@ namespace Game.Enemy
         private GameObject _target;
 
         private GameObject _player;
-        
-        public float fireRate = 0.2f;
+
+        public float fireRate = 1000f;
         private float _lastShot = 0.0f;
+        private GameObject _newBullet;
 
 
         private void Start()
@@ -29,8 +30,8 @@ namespace Game.Enemy
         {
             if (_shotReady && Time.time > _lastShot + fireRate)
             {
-                var newBullet = Instantiate(bullet, turret.transform.position, Quaternion.identity);
-                newBullet.transform.LookAt(_player.transform.position);
+                _newBullet = Instantiate(bullet, turret.transform.position, Quaternion.identity);
+                _newBullet.transform.LookAt(_player.transform.position);
                 _lastShot = Time.time;
             }
         }

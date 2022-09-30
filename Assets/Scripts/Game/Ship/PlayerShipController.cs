@@ -111,7 +111,6 @@ public class PlayerShipController : MonoBehaviour
     /// </summary>
     IEnumerator recenterCamera()
     {
-        Debug.Log("Enter in coroutine");
         while (TPSCamera.transform.localRotation.eulerAngles.magnitude >= 1)
         {
             var newRotation =
@@ -148,7 +147,6 @@ public class PlayerShipController : MonoBehaviour
             }
         }
 
-        Debug.Log(_speedCurent);
     }
 
     private void LerpSpeed()

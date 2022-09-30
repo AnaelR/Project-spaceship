@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeFactor: 150
   noTurn: 0.1
-  speedRatio: 1
-  speedMaxValue: 10
+  speedRatio: 0.3
+  speedMaxValue: 5
   speedMinValue: 0
   accelerationEase: 1
   shipRotateDelay: 1

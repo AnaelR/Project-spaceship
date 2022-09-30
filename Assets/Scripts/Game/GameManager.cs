@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("Start");
         if (PlayerShipPrefab)
             GameObject.Instantiate(PlayerShipPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         EnterMenu.SetActive(false);
