@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1241247610535650034}
   m_Layer: 0
   m_Name: MissileBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   speed: 100
   lifeTime: 10
   canKill: 0
+  impactEffect: {fileID: 0}
 --- !u!136 &1241247610535650034
 CapsuleCollider:
   m_ObjectHideFlags: 0

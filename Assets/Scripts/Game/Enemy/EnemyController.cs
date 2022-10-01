@@ -1,17 +1,40 @@
 using System;
 using System.Collections;
+using Game.Assets;
 using UnityEngine;
 using UnityEngine.Apple;
+using UnityEngine.UI;
 
 namespace Game.Enemy
 {
     public class EnemyController : MonoBehaviour
     {
         //Enemy health
-        public float enemyHealth = 10f;
+        public float initialLife = 100;
+        private float _currentLife;
+        public Canvas lifeBar;
+        public Slider lifeBarSlider;
         private bool _isDead = false;
 
         private float shipRotation = 0f;
+
+        private void Start()
+        {
+            _currentLife = initialLife;
+        }
+
+        /// <summary>
+        /// When the enemy collides with a bullet, apply damage to the enemy
+        /// </summary>
+        /// <param name="collision">The collision that occurred.</param>
+        private void OnCollisionEnter(Collision collision)
+        {
+            //Output the Collider's GameObject's name
+            if (collision.collider.gameObject.CompareTag("PlayerBullet"))
+            {
+                ApplyDamage(collision.collider.gameObject.GetComponent<Bullet>().bulletDamage);
+            }
+        }
 
 
         /// <summary>
@@ -23,24 +46,24 @@ namespace Game.Enemy
         /// 
         /// </summary>
         /// <param name="theDamage">The amount of damage to apply to the enemy.</param>
-        public void ApplyDamage(float theDamage)
+        private void ApplyDamage(int theDamage)
         {
-            if (!_isDead)
-            {
-                enemyHealth = enemyHealth - theDamage;
+            if (_isDead || !lifeBar ) return;
+            _currentLife -= theDamage;
 
-                if (enemyHealth <= 0)
-                {
-                    Die();
-                }
+            lifeBarSlider.value = (_currentLife*100/initialLife)/100;
+
+            if (_currentLife <= 0)
+            {
+                Die();
             }
         }
 
+        
         /// <summary>
-        /// If the player is dead, destroy the game object after 5 seconds
+        /// If the enemy is dead, then destroy the enemy
         ///
-        /// 
-        /// WIP Not implemented yet
+        /// WIP
         ///
         /// 
         /// </summary>
@@ -48,7 +71,9 @@ namespace Game.Enemy
         {
             _isDead = true;
             //Destroy
-            Destroy(transform.gameObject, 5);
+            GameManager.Instance.GameOver(true);
+
+            Destroy(transform.gameObject);
         }
         
         /// <summary>

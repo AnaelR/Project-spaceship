@@ -7,7 +7,26 @@ namespace Game.Assets
     {
         public float speed = 40f;
         public float lifeTime = 10f;
+        public int bulletDamage = 10;
         public bool canKill = true;
+        public GameObject impactEffect;
+        
+        private static Bullet _instance = null;
+        public static Bullet Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<Bullet>();
+                }
+
+                return _instance;
+            }
+
+            private set { _instance = value; }
+        }
+        
 
         /// <summary>
         /// > Destroy the gameObject after a certain amount of time
@@ -33,17 +52,15 @@ namespace Game.Assets
         /// If the player collides with the enemy, the game is over
         ///
         ///
-        /// WIP : next feature is to add a health system to the player and enemies
+        /// WIP : fixe animation
         ///
         /// 
         /// </summary>
         /// <param name="hit">This is the collision that the object has hit.</param>
         private void OnCollisionEnter(Collision hit)
         {
-            if (canKill && hit.gameObject.CompareTag("Player"))
-            {
-                GameManager.Instance.GameOver();
-            }
+            Instantiate(impactEffect, hit.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 }

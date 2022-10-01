@@ -50,5 +50,11 @@ public class InputController : MonoBehaviour
         {
             this.OnUserInput?.Invoke("Pause");
         }
+        
+        // Escape button is press
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            this.OnUserInput?.Invoke("Fire");
+        }
     }
 }

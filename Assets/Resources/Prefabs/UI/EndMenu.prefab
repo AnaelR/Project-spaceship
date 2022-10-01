@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 6597141115314348032}
   - component: {fileID: 6597141115314348033}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1207.77, y: -750.5}
+  m_SizeDelta: {x: -34.27002, y: -89.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6597141116127938431
 CanvasRenderer:

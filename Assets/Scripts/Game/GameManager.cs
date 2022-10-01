@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Assets;
+using Game.Enemy;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,13 +13,13 @@ public class GameManager : MonoBehaviour
     public Camera CinematicCamera;
     public GameObject EnterMenu;
     public GameObject PauseMenu;
-    public GameObject GameOverMenu;
+    public GameObject WinMenu;
+    public GameObject LooseMenu;
 
     private bool _pauseStatus = false;
     private bool _gameIsOver = false;
 
     public delegate void GamePause(bool status);
-
     public event GamePause ToggleGamePause;
 
     public static GameManager Instance
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
         if (InputController.Instance)
             InputController.Instance.OnUserInput += UserInput;
     }
-    
+
     /// <summary>
     /// The Start() function is called when the script is first run. It enables the CinematicCamera
     /// </summary>
@@ -67,10 +69,17 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// This function is called when the player dies. It pauses the game, and displays the game over menu
     /// </summary>
-    public void GameOver()
+    public void GameOver(bool result)
     {
         ToggleGamePause?.Invoke(true);
-        GameOverMenu.SetActive(true);
+        if (result)
+        {
+            WinMenu.SetActive(true);
+        }
+        else
+        {
+            LooseMenu.SetActive(true);
+        }
         _gameIsOver = true;
     }
 

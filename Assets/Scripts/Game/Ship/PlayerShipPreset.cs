@@ -26,4 +26,8 @@ public class PlayerShipPreset : ScriptableObject
 
     [Tooltip("Delay before ship rotate to origin")]
     public float shipRotateDelayToEnd = 1f;
+    
+    public float fireRate = 0.2f;
+    
+    public GameObject bulletType;
 }

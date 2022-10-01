@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3305964}
   - component: {fileID: 11475718}
   - component: {fileID: 1510871237656329886}
+  - component: {fileID: 6764793652491160220}
   m_Layer: 0
-  m_Name: LaserBullet
-  m_TagString: Untagged
+  m_Name: BlueLaserBullet
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_templateMaterial: {fileID: 2100000, guid: 974b33ccbd786464a825203eb88b8dab, type: 2}
   m_doNotOverwriteTemplateMaterialProperties: 0
-  m_startPos: {x: 0, y: 100, z: 0}
+  m_startPos: {x: 0, y: 0, z: 50}
   m_endPos: {x: 0, y: 0, z: 0}
   m_lineColor: {r: 0, g: 1, b: 1, a: 1}
   m_lineWidth: 20
@@ -116,6 +117,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3010d1b7c3d466980e42a116473f546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 1000
   lifeTime: 10
-  canKill: 0
+  bulletDamage: 10
+  canKill: 1
+  impactEffect: {fileID: 443653445314069269, guid: 7e3e8e2f6ecdbb04a982af0a14f2d887, type: 3}
+--- !u!65 &6764793652491160220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122648}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4, z: 54}
+  m_Center: {x: 0, y: 0, z: 25}

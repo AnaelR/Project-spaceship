@@ -10,8 +10,6 @@ namespace Game.Enemy
         
         public string targetTag;
 
-        //Warning: MUST BE MIXED UP WITH THE TurretController.cs SCRIPT
-
         private void OnTriggerEnter(Collider target)
         {
             if (target.gameObject.CompareTag(targetTag))

@@ -82,10 +82,14 @@ Assets/Scenes/ThomasScene.unity
 Assets/Scenes/Anael.unity.meta
 Assets/Scenes/ThomasScene.unity.meta
 
-Assets/StarSparrow/
+Assets/StarSparrow
+Assets/StarSparrow.meta
 
-Assets/F3_Corvette/
-
+Assets/F3_Corvette
 Assets/F3_Corvette.meta
 
-Assets/VolumetricLines/
+Assets/VolumetricLines
+Assets/VolumetricLines.meta
+
+Assets/FireIceProjectileExplosion
+Assets/FireIceProjectileExplosion.meta

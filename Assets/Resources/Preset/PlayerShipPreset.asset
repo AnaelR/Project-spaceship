@@ -20,3 +20,5 @@ MonoBehaviour:
   accelerationEase: 1
   shipRotateDelay: 1
   shipRotateDelayToEnd: 1
+  fireRate: 0.2
+  bulletType: {fileID: 122648, guid: 2c8dd2ae33ffb479ba29386f0e4ddda1, type: 3}
